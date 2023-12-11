@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 /**
- * Maps marker type to texture.
+ * Maps a marker type to texture.
  *
  * @author Hunternif
  */
