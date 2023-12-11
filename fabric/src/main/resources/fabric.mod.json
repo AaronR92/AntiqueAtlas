@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "id": "antiqueatlas",
-  "name": "Antique Atlas",
+  "id": "antiqueatlasreborn",
+  "name": "Antique Atlas Reborn",
   "description": "Antique Atlas is a book that acts like a map featuring infinite scrolling, zoom and custom labeled markers. The map is generated around the player by calculating the average biome in each 16x16 chunk.",
   "version": "${version}",
-  "authors": ["Hunternif", "tyra314"],
-  "contributors": ["coolAlias", "Kenkron", "TheCodeWarrior",  "Localizations by crafteverywhere", "CapoFantasma97", "Mazdallier", "mankra", "Zerotiger"],
+  "authors": ["Hunternif", "tyra314", "kallmetony"],
+  "contributors": ["coolAlias", "Kenkron", "TheCodeWarrior", "Localizations by crafteverywhere", "CapoFantasma97", "Mazdallier", "mankra", "Zerotiger"],
   "entrypoints": {
     "main": [
       "hunternif.mc.impl.atlas.fabric.AntiqueAtlasModFabric"
@@ -20,8 +20,8 @@
   "environment": "*",
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/antique-atlas",
-    "sources": "https://github.com/AntiqueAtlasTeam/AntiqueAtlas",
-    "issues": "https://github.com/AntiqueAtlasTeam/AntiqueAtlas/issues"
+    "sources": "https://github.com/kallmetony/AntiqueAtlasReborn",
+    "issues": "https://github.com/kallmetony/AntiqueAtlasReborn/issues"
   },
   "icon": "antiqueatlas_icon.png",
   "depends": {

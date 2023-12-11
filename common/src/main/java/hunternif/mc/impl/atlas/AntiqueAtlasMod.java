@@ -24,7 +24,7 @@ import org.apache.logging.log4j.Logger;
 
 public class AntiqueAtlasMod {
     public static final String ID = "antiqueatlas";
-    public static final String NAME = "Antique Atlas";
+    public static final String NAME = "Antique Atlas Reborn";
 
     public static Logger LOG = LogManager.getLogger(NAME);
 
