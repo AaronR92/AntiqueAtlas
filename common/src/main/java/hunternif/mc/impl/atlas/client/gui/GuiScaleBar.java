@@ -6,7 +6,7 @@ import hunternif.mc.impl.atlas.client.Textures;
 import hunternif.mc.impl.atlas.client.gui.core.GuiComponent;
 import hunternif.mc.impl.atlas.client.texture.ITexture;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 
 import java.util.Collections;
@@ -57,7 +57,7 @@ public class GuiScaleBar extends GuiComponent {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float partialTick) {
+    public void render(MatrixStack context, int mouseX, int mouseY, float partialTick) {
         ITexture texture = getTexture();
         if (texture == null) return;
 

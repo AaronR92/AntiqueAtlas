@@ -1,7 +1,7 @@
 package hunternif.mc.impl.atlas.structure;
 
 import hunternif.mc.impl.atlas.AntiqueAtlasMod;
-import net.minecraft.registry.tag.StructureTags;
+import net.minecraft.tag.StructureTags;
 import net.minecraft.text.Text;
 
 public class Village {

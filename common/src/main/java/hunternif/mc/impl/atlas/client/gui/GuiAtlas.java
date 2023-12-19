@@ -22,7 +22,7 @@ import hunternif.mc.impl.atlas.registry.MarkerType;
 import hunternif.mc.impl.atlas.util.MathUtil;
 import hunternif.mc.impl.atlas.util.Rect;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
@@ -37,8 +37,6 @@ import net.minecraft.util.math.MathHelper;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -756,7 +754,7 @@ public class GuiAtlas extends GuiComponent {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float par3) {
+    public void render(MatrixStack context, int mouseX, int mouseY, float par3) {
         long currentMillis = System.currentTimeMillis();
         long deltaMillis = currentMillis - lastUpdateMillis;
         lastUpdateMillis = currentMillis;
@@ -807,8 +805,8 @@ public class GuiAtlas extends GuiComponent {
         tiles.setScope(new Rect(mapStartX, mapStartZ, mapEndX, mapEndZ));
         tiles.setStep(tile2ChunkScale);
 
-        context.getMatrices().push();
-        context.getMatrices().translate(mapStartScreenX, mapStartScreenY, 0);
+        context.push();
+        context.translate(mapStartScreenX, mapStartScreenY, 0);
 
         for (SubTileQuartet subtiles : tiles) {
             for (SubTile subtile : subtiles) {
@@ -821,7 +819,7 @@ public class GuiAtlas extends GuiComponent {
             }
         }
 
-        context.getMatrices().pop();
+        context.pop();
 
         int markersStartX = MathUtil.roundToBase(mapStartX, MarkersData.CHUNK_STEP) / MarkersData.CHUNK_STEP - 1;
         int markersStartZ = MathUtil.roundToBase(mapStartZ, MarkersData.CHUNK_STEP) / MarkersData.CHUNK_STEP - 1;
@@ -889,7 +887,7 @@ public class GuiAtlas extends GuiComponent {
         }
     }
 
-    private void renderPlayer(DrawContext context, double iconScale) {
+    private void renderPlayer(MatrixStack context, double iconScale) {
         int playerOffsetX = worldXToScreenX(player.getBlockX());
         int playerOffsetY = worldZToScreenY(player.getBlockZ());
 
@@ -905,8 +903,7 @@ public class GuiAtlas extends GuiComponent {
         RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 
-    private void renderScaleOverlay(DrawContext context, long deltaMillis) {
-        MatrixStack matrices = context.getMatrices();
+    private void renderScaleOverlay(MatrixStack matrices, long deltaMillis) {
         if (scaleAlpha > 3) {
             matrices.push();
             matrices.translate(getGuiX() + WIDTH - 13, getGuiY() + 12, 0);
@@ -919,7 +916,7 @@ public class GuiAtlas extends GuiComponent {
             text = "x";
             xWidth = textWidth = this.textRenderer.getWidth(text);
             xWidth++;
-            context.drawText(this.textRenderer, text, -textWidth, 0, color, false);
+            this.textRenderer.draw(matrices, text, -textWidth, 0, color);
 
             text = zoomNames[zoomLevel];
             if (text.contains("/")) {
@@ -928,16 +925,16 @@ public class GuiAtlas extends GuiComponent {
                 int centerXtranslate = Math.max(this.textRenderer.getWidth(parts[0]), this.textRenderer.getWidth(parts[1])) / 2;
                 matrices.translate(-xWidth - centerXtranslate, (float) -this.textRenderer.fontHeight / 2, 0);
 
-                context.fill(-centerXtranslate - 1, this.textRenderer.fontHeight - 1, centerXtranslate, this.textRenderer.fontHeight, color);
+                DrawableHelper.fill(matrices, -centerXtranslate - 1, this.textRenderer.fontHeight - 1, centerXtranslate, this.textRenderer.fontHeight, color);
 
                 textWidth = this.textRenderer.getWidth(parts[0]);
-                context.drawText(this.textRenderer, parts[0], -textWidth / 2, 0, color, false);
+                this.textRenderer.draw(matrices, parts[0], -textWidth / 2, 0, color);
 
                 textWidth = this.textRenderer.getWidth(parts[1]);
-                context.drawText(this.textRenderer, parts[1], -textWidth / 2, 10, color, false);
+                this.textRenderer.draw(matrices, parts[1], -textWidth / 2, 10, color);
             } else {
                 textWidth = this.textRenderer.getWidth(text);
-                context.drawText(this.textRenderer, text, -textWidth - xWidth + 1, 2, color, false);
+                this.textRenderer.draw(matrices, text, -textWidth - xWidth + 1, 2, color);
             }
 
             matrices.pop();
@@ -956,7 +953,7 @@ public class GuiAtlas extends GuiComponent {
         }
     }
 
-    private void renderMarkers(DrawContext context, int markersStartX, int markersStartZ,
+    private void renderMarkers(MatrixStack context, int markersStartX, int markersStartZ,
                                int markersEndX, int markersEndZ, DimensionMarkersData markersData) {
         if (markersData == null) return;
 
@@ -971,7 +968,7 @@ public class GuiAtlas extends GuiComponent {
         }
     }
 
-    private void renderMarker(DrawContext context, Marker marker, double scale) {
+    private void renderMarker(MatrixStack context, Marker marker, double scale) {
         MarkerType type = MarkerType.REGISTRY.get(marker.getType());
         if (type.shouldHide(state.is(HIDING_MARKERS), scaleClipIndex)) {
             return;

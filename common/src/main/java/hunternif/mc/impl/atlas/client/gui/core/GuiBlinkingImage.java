@@ -2,7 +2,7 @@ package hunternif.mc.impl.atlas.client.gui.core;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import hunternif.mc.impl.atlas.client.texture.ITexture;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -51,7 +51,7 @@ public class GuiBlinkingImage extends GuiComponent {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float partialTick) {
+    public void render(MatrixStack context, int mouseX, int mouseY, float partialTick) {
         long currentTime = System.currentTimeMillis();
         if (lastTickTime + blinkTime < currentTime) {
             lastTickTime = currentTime;
@@ -67,7 +67,7 @@ public class GuiBlinkingImage extends GuiComponent {
         RenderSystem.setShaderColor(1,1,1,1);
     }
 
-    private void drawImage(DrawContext context) {
+    private void drawImage(MatrixStack context) {
         texture.draw(context, getGuiX(), getGuiY(), getWidth(), getHeight());
     }
 }

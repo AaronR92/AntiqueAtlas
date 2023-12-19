@@ -4,7 +4,7 @@
   "name": "Antique Atlas Reborn",
   "description": "Antique Atlas is a book that acts like a map featuring infinite scrolling, zoom and custom labeled markers. The map is generated around the player by calculating the average biome in each 16x16 chunk.",
   "version": "${version}",
-  "authors": ["Hunternif", "tyra314", "kallmetony"],
+  "authors": ["Hunternif", "tyra314", "sisby-folk", "kallmetony"],
   "contributors": ["coolAlias", "Kenkron", "TheCodeWarrior", "Localizations by crafteverywhere", "CapoFantasma97", "Mazdallier", "mankra", "Zerotiger"],
   "entrypoints": {
     "main": [
@@ -25,11 +25,11 @@
   },
   "icon": "antiqueatlas_icon.png",
   "depends": {
-    "fabricloader": ">=0.10.8",
-    "fabric": ">=0.88.1",
-    "minecraft": ">=1.20.1",
-    "cloth-config2": ">=11.1.106",
-    "architectury": ">=9.1.12"
+    "fabricloader": ">=0.15.3",
+    "fabric": ">=0.77.0",
+    "minecraft": ">=1.19.2",
+    "cloth-config2": ">=8.2.88",
+    "architectury": ">=6.5.85"
   },
   "mixins": [
     "antiqueatlas.mixins.json",

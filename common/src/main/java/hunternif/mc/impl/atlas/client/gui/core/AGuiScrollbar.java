@@ -2,7 +2,7 @@ package hunternif.mc.impl.atlas.client.gui.core;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import hunternif.mc.impl.atlas.client.texture.ITexture;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.opengl.GL11;
 
 
@@ -180,7 +180,7 @@ public abstract class AGuiScrollbar extends GuiComponent {
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float partialTick) {
+    public void render(MatrixStack context, int mouseX, int mouseY, float partialTick) {
         // Don't draw the anchor if there's nothing to scroll:
         if (!visible) {
             isDragged = false;
@@ -230,7 +230,7 @@ public abstract class AGuiScrollbar extends GuiComponent {
     protected abstract int getMousePos(int mouseX, int mouseY);
 
     // Modifying axis-related data
-    protected abstract void drawAnchor(DrawContext context);
+    protected abstract void drawAnchor(MatrixStack context);
 
     protected abstract void updateContentPos();
 

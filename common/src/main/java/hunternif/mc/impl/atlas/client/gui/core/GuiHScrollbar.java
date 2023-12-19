@@ -1,6 +1,6 @@
 package hunternif.mc.impl.atlas.client.gui.core;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
 
 public class GuiHScrollbar extends AGuiScrollbar {
 
@@ -9,7 +9,7 @@ public class GuiHScrollbar extends AGuiScrollbar {
     }
 
     @Override
-    protected void drawAnchor(DrawContext context) {
+    protected void drawAnchor(MatrixStack context) {
         // Draw left cap:
         texture.draw(context, getGuiX() + anchorPos, getGuiY(), capLength, textureHeight, 0, 0, capLength, textureHeight);
 

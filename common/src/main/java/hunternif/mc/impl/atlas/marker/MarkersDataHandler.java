@@ -1,7 +1,7 @@
 package hunternif.mc.impl.atlas.marker;
 
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
 

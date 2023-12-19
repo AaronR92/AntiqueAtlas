@@ -3,14 +3,14 @@ package hunternif.mc.impl.atlas.client.texture;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
-import org.joml.Matrix4f;
+import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 
 /**
  * An abstract base class, which implements the ITexture interface using
@@ -44,38 +44,37 @@ public abstract class ATexture implements ITexture {
     }
 
     @Override
-    public void draw(DrawContext context, int x, int y) {
+    public void draw(MatrixStack context, int x, int y) {
         draw(context, x, y, width(), height());
     }
 
     @Override
-    public void draw(DrawContext context, int x, int y, int width, int height) {
+    public void draw(MatrixStack context, int x, int y, int width, int height) {
         draw(context, x, y, width, height, 0, 0, this.width(), this.height());
     }
 
     @Override
-    public void draw(DrawContext context, int x, int y, int u, int v, int regionWidth, int regionHeight) {
+    public void draw(MatrixStack context, int x, int y, int u, int v, int regionWidth, int regionHeight) {
         draw(context, x, y, regionWidth, regionHeight, u, v, regionWidth, regionHeight);
     }
 
     @Override
-    public void draw(DrawContext context, int x, int y, int width, int height, int u, int v, int regionWidth, int regionHeight) {
+    public void draw(MatrixStack context, int x, int y, int width, int height, int u, int v, int regionWidth, int regionHeight) {
         if (autobind) {
             bind();
         }
-        context.drawTexture(getTexture(), x, y, width, height, u, v, regionWidth, regionHeight, this.width(), this.height());
-    }
+        DrawableHelper.drawTexture(context, x, y, width, height, u, v, regionWidth, regionHeight, this.width(), this.height());    }
 
     @Override
-    public void drawCenteredWithRotation(DrawContext context, int x, int y, int width, int height, float rotation) {
-        context.getMatrices().push();
-        context.getMatrices().translate(x, y, 0);
-        context.getMatrices().multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180 + rotation));
-        context.getMatrices().translate(-width / 2f, -height / 2f, 0f);
+    public void drawCenteredWithRotation(MatrixStack context, int x, int y, int width, int height, float rotation) {
+        context.push();
+        context.translate(x, y, 0);
+        context.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180 + rotation));
+        context.translate(-width / 2f, -height / 2f, 0f);
 
         draw(context, 0,0, width, height);
 
-        context.getMatrices().pop();
+        context.pop();
     }
 
     @Override
