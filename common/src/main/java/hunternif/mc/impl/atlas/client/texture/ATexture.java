@@ -9,8 +9,8 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
+import org.joml.Matrix4f;
 
 /**
  * An abstract base class, which implements the ITexture interface using
@@ -69,7 +69,7 @@ public abstract class ATexture implements ITexture {
     public void drawCenteredWithRotation(MatrixStack context, int x, int y, int width, int height, float rotation) {
         context.push();
         context.translate(x, y, 0);
-        context.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180 + rotation));
+        context.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(180 + rotation));
         context.translate(-width / 2f, -height / 2f, 0f);
 
         draw(context, 0,0, width, height);

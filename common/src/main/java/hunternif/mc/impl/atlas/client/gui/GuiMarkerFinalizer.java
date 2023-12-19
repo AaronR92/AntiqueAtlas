@@ -77,7 +77,7 @@ public class GuiMarkerFinalizer extends GuiComponent {
     public void init() {
         super.init();
 
-        addDrawableChild(btnDone = new ButtonWidget(this.width / 2 - BUTTON_WIDTH - BUTTON_SPACING / 2, this.height / 2 + 40, BUTTON_WIDTH, 20, Text.translatable("gui.done"), (button) -> {
+        addDrawableChild(btnDone = ButtonWidget.builder(Text.translatable("gui.done"), (button) -> {
             AtlasClientAPI.getMarkerAPI().putMarker(world, true, atlasID, MarkerType.REGISTRY.getId(selectedType), Text.literal(textField.getText()), markerX, markerZ);
             Log.info("Put marker in Atlas #%d \"%s\" at (%d, %d)", atlasID, textField.getText(), markerX, markerZ);
 
@@ -86,13 +86,14 @@ public class GuiMarkerFinalizer extends GuiComponent {
                     SoundEvents.ENTITY_VILLAGER_WORK_CARTOGRAPHER, SoundCategory.AMBIENT,
                     1F, 1F);
             closeChild();
-        }));
-        addDrawableChild(btnCancel = new ButtonWidget(this.width / 2 + BUTTON_SPACING / 2, this.height / 2 + 40, BUTTON_WIDTH, 20, Text.translatable("gui.cancel"), (button) -> {
+        }).dimensions(this.width / 2 - BUTTON_WIDTH - BUTTON_SPACING / 2, this.height / 2 + 40, BUTTON_WIDTH, 20).build());
+        addDrawableChild(btnCancel = ButtonWidget.builder(Text.translatable("gui.cancel"), (button) -> {
             closeChild();
-        }));
+        }).dimensions(this.width / 2 + BUTTON_SPACING / 2, this.height / 2 + 40, BUTTON_WIDTH, 20).build());
         textField = new TextFieldWidget(MinecraftClient.getInstance().textRenderer, (this.width - 200) / 2, this.height / 2 - 81, 200, 20, Text.translatable("gui.antiqueatlas.marker.label"));
         textField.setEditable(true);
-        textField.setText("");
+        textField.setFocusUnlocked(true);
+        textField.setFocused(true);
 
         scroller = new GuiScrollingContainer();
         scroller.setWheelScrollsHorizontally();

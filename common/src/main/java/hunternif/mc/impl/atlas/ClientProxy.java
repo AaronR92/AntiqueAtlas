@@ -8,8 +8,8 @@ import hunternif.mc.impl.atlas.registry.MarkerType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloader;
 import net.minecraft.resource.ResourceType;
@@ -59,15 +59,15 @@ public class ClientProxy implements ResourceReloader {
      * we need the ClientWorld loaded here.
      */
     public static void assignCustomBiomeTextures(ClientWorld world) {
-        for (Map.Entry<RegistryKey<Biome>, Biome> biome : world.getRegistryManager().get(Registry.BIOME_KEY).getEntrySet()) {
-            Identifier id = world.getRegistryManager().get(Registry.BIOME_KEY).getId(biome.getValue());
+        for (Map.Entry<RegistryKey<Biome>, Biome> biome : world.getRegistryManager().get(RegistryKeys.BIOME).getEntrySet()) {
+            Identifier id = world.getRegistryManager().get(RegistryKeys.BIOME).getId(biome.getValue());
             if (!TileTextureMap.instance().isRegistered(id)) {
                 TileTextureMap.instance().autoRegister(id, biome.getKey());
             }
         }
 
-        for (Map.Entry<RegistryKey<Biome>, Biome> entry : world.getRegistryManager().get(Registry.BIOME_KEY).getEntrySet()) {
-            Identifier id = world.getRegistryManager().get(Registry.BIOME_KEY).getId(entry.getValue());
+        for (Map.Entry<RegistryKey<Biome>, Biome> entry : world.getRegistryManager().get(RegistryKeys.BIOME).getEntrySet()) {
+            Identifier id = world.getRegistryManager().get(RegistryKeys.BIOME).getId(entry.getValue());
             if (!TileTextureMap.instance().isRegistered(id)) {
                 TileTextureMap.instance().autoRegister(id, entry.getKey());
             }

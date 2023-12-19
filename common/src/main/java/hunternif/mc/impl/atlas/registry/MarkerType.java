@@ -15,9 +15,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.TextureManager;
-import net.minecraft.util.registry.DefaultedRegistry;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.SimpleDefaultedRegistry;
 import net.minecraft.resource.Resource;
 import net.minecraft.util.Identifier;
 
@@ -27,11 +27,10 @@ import java.util.List;
 
 public class MarkerType {
 	public static final RegistryKey<Registry<MarkerType>> KEY = RegistryKey.ofRegistry(AntiqueAtlasMod.id("marker"));
-	public static final DefaultedRegistry<MarkerType> REGISTRY = new DefaultedRegistry<>(
-			AntiqueAtlasMod.id("red_x_small").toString(),
+	public static final SimpleDefaultedRegistry<MarkerType> REGISTRY = new SimpleDefaultedRegistry<>(AntiqueAtlasMod.id("red_x_small").toString(),
 			KEY,
 			Lifecycle.experimental(),
-			null
+			false
 	);
 
 	private Identifier[] icons;
