@@ -98,11 +98,16 @@ public class TileTextureMap {
 
         RegistryEntry<Biome> biomeTag = MinecraftClient.getInstance().world.getRegistryManager().get(RegistryKeys.BIOME).entryOf(biome);
 
+        System.out.println(biomeTag.getKey().get());
+
+        biomeTag.streamTags().forEach(biomeTagKey -> biomeTagKey.toString());
+
         if (biomeIsVoid(biomeTag)) {
             return Optional.of(AntiqueAtlasMod.id("end_void"));
         }
 
         if (biomeTag.isIn(BiomeTags.IS_END) || biomeIsEnd(biomeTag)) {
+            System.out.println("end");
             if (biomeHasVegetation(biomeTag)) {
                 return Optional.of(AntiqueAtlasMod.id("end_island_plants"));
             } else {
@@ -111,10 +116,12 @@ public class TileTextureMap {
         }
 
         if (biomeTag.isIn(BiomeTags.IS_NETHER) || biomeIsNether(biomeTag)) {
+            System.out.println("nether");
             return Optional.of(AntiqueAtlasMod.id("soul_sand_valley"));
         }
 
         if (biomeIsSwamp(biomeTag)) {
+            System.out.println("swamp");
             if (biomeTag.isIn(BiomeTags.IS_HILL)) {
                 return Optional.of(AntiqueAtlasMod.id("swamp_hills"));
             } else {
@@ -126,6 +133,7 @@ public class TileTextureMap {
                 || biomeTag.isIn(BiomeTags.IS_DEEP_OCEAN)
                 || biomeTag.isIn(BiomeTags.IS_RIVER)
                 || biomeIsWater(biomeTag)) {
+            System.out.println("water biome");
             if (biomeIsIcy(biomeTag))
                 return Optional.of(AntiqueAtlasMod.id("ice"));
 
@@ -133,10 +141,12 @@ public class TileTextureMap {
         }
 
         if (biomeTag.isIn(BiomeTags.IS_BEACH) || biomeIsShore(biomeTag)) {
+            System.out.println("beach");
             return Optional.of(AntiqueAtlasMod.id("shore"));
         }
 
         if (biomeTag.isIn(BiomeTags.IS_JUNGLE) || biomeIsJungle(biomeTag)) {
+            System.out.println("jungle");
             if (biomeTag.isIn(BiomeTags.IS_HILL)) {
                 return Optional.of(AntiqueAtlasMod.id("jungle_hills"));
             } else {
@@ -145,10 +155,12 @@ public class TileTextureMap {
         }
 
         if (biomeTag.isIn(BiomeTags.IS_SAVANNA) || biomeIsSavanna(biomeTag)) {
+            System.out.println("savanna");
             return Optional.of(AntiqueAtlasMod.id("savana"));
         }
 
         if (biomeTag.isIn(BiomeTags.IS_BADLANDS) || biomeIsBadlands(biomeTag)) {
+            System.out.println("badlands or so");
             if (biomeIsPlateau(biomeTag)) { // Is this still valid? Does height checking supersede this?
                 return Optional.of(AntiqueAtlasMod.id("plateau_mesa"));
             } else {
@@ -157,6 +169,7 @@ public class TileTextureMap {
         }
 
         if (biomeTag.isIn(BiomeTags.IS_FOREST) || biomeIsForest(biomeTag)) {
+            System.out.println("forest");
             if (biomeIsIcy(biomeTag) || biomeIsSnowy(biomeTag)) {
                 if (biomeTag.isIn(BiomeTags.IS_HILL)) {
                     return Optional.of(AntiqueAtlasMod.id("snow_pines_hills"));
@@ -173,6 +186,7 @@ public class TileTextureMap {
         }
 
         if (biomeIsPlains(biomeTag)) {
+            System.out.println("plains");
             if (biomeIsIcy(biomeTag) || biomeIsSnowy(biomeTag)) {
                 if (biomeTag.isIn(BiomeTags.IS_HILL)) {
                     return Optional.of(AntiqueAtlasMod.id("snow_hills"));
@@ -189,6 +203,7 @@ public class TileTextureMap {
         }
 
         if (biomeIsIcy(biomeTag)) {
+            System.out.println("icy");
             if (biomeTag.isIn(BiomeTags.IS_HILL)) {
                 return Optional.of(AntiqueAtlasMod.id("mountains_snow_caps"));
             } else {
@@ -197,6 +212,7 @@ public class TileTextureMap {
         }
 
         if (biomeIsDesert(biomeTag)) {
+            System.out.println("desert");
             if (biomeTag.isIn(BiomeTags.IS_HILL)) {
                 return Optional.of(AntiqueAtlasMod.id("desert_hills"));
             } else {
@@ -205,26 +221,32 @@ public class TileTextureMap {
         }
 
         if (biomeTag.isIn(BiomeTags.IS_TAIGA) || biomeIsTaiga(biomeTag)) { // should this be any snowy biome as a fallback?
+            System.out.println("taiga");
             return Optional.of(AntiqueAtlasMod.id("snow"));
         }
 
         if (biomeIsExtremeHills(biomeTag)) {
+            System.out.println("hills");
             return Optional.of(AntiqueAtlasMod.id("hills"));
         }
 
         if (biomeIsPeak(biomeTag)) {
+            System.out.println("peak");
             return Optional.of(AntiqueAtlasMod.id("mountains_snow_caps"));
         }
 
         if (biomeTag.isIn(BiomeTags.IS_MOUNTAIN) || biomeIsMountain(biomeTag)) {
+            System.out.println("mountain");
             return Optional.of(AntiqueAtlasMod.id("mountains"));
         }
 
         if (biomeIsMushroom(biomeTag)) {
+            System.out.println("mushroom");
             return Optional.of(AntiqueAtlasMod.id("mushroom"));
         }
 
         if (biomeTag.isIn(BiomeTags.IS_HILL)) {
+            System.out.println("hills");
             return Optional.of(AntiqueAtlasMod.id("hills"));
         }
 
@@ -232,7 +254,22 @@ public class TileTextureMap {
             AntiqueAtlasMod.LOG.warn("Underground biomes aren't supported yet.");
         }
 
-        return Optional.empty();
+        /*
+         * Returning default plains texture for now,
+         * so it's not that ugly (Must return Optional.empty())
+         */
+        Log.error(
+                "Failed to auto-register a standard texture set for the biome '%s'. " +
+                        "Applying default texture. " +
+                        "This is most likely caused by errors in the TextureSet configurations, " +
+                        "check your resource packs first before reporting it as an issue!",
+                biome.getValue().toString()
+        );
+        return getDefaultTextureSet();
+    }
+
+    private static Optional<Identifier> getDefaultTextureSet() {
+        return Optional.of(AntiqueAtlasMod.id("plains"));
     }
 
     @ExpectPlatform
