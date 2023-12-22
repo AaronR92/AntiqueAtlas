@@ -110,7 +110,6 @@ public class TileTextureMap {
         }
 
         if (biomeTag.isIn(BiomeTags.IS_END) || biomeIsEnd(biomeTag)) {
-            System.out.println("end");
             if (biomeHasVegetation(biomeTag)) {
                 return Optional.of(AntiqueAtlasMod.id("end_island_plants"));
             } else {
