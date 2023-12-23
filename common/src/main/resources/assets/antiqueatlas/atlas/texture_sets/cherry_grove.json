@@ -2,8 +2,7 @@
   "version": 1,
   "data": {
     "textures": {
-      "antiqueatlas:cherry_grove": 2,
-      "antiqueatlas:grass4": 1
+      "antiqueatlas:cherry_grove": 1
     }
   }
 }
