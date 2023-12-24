@@ -18,6 +18,7 @@
   "gui.antiqueatlas.marker.treasure": "Buried treasure",
   "gui.antiqueatlas.marker.monument": "Ocean Monument",
   "gui.antiqueatlas.marker.mansion": "Woodland Mansion",
+  "gui.antiqueatlas.marker.shipwreck": "Shipwreck",
 
   "gui.antiqueatlas.export.opening": "Opening file system dialog...",
   "gui.antiqueatlas.export.selectFile": "Select PNG file to save to",
