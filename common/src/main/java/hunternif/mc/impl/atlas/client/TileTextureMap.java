@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 public class TileTextureMap {
     private static final TileTextureMap INSTANCE = new TileTextureMap();
 
-    public static final Identifier DEFAULT_TEXTURE = AntiqueAtlasMod.id("test");
+    public static final Identifier DEFAULT_TEXTURE = AntiqueAtlasMod.id("plains");
 
     public static TileTextureMap instance() {
         return INSTANCE;
@@ -87,7 +87,13 @@ public class TileTextureMap {
             setAllTextures(id, TextureSetMap.instance().getByName(texture_set.get()));
             Log.info("Auto-registered standard texture set for biome %s: %s", id, texture_set.get());
         } else {
-            Log.error("Failed to auto-register a standard texture set for the biome '%s'. This is most likely caused by errors in the TextureSet configurations, check your resource packs first before reporting it as an issue!", id.toString());
+            Log.error(
+                    "Failed to auto-register a standard texture set for the biome '%s'. " +
+                            "Applying default texture. " +
+                            "This is most likely caused by errors in the TextureSet configurations, " +
+                            "check your resource packs first before reporting it as an issue!",
+                    biome.getValue().toString()
+            );
             setAllTextures(id, getDefaultTexture());
         }
     }
