@@ -31,6 +31,7 @@ public class TileIdMap {
 
             // Overworld stuff:
             RUINED_PORTAL = AntiqueAtlasMod.id("ruined_portal"),
+            SHIPWRECK = AntiqueAtlasMod.id("shipwreck"),
 
             // Nether & Nether Fortress:
             TILE_LAVA = AntiqueAtlasMod.id("lava"),
