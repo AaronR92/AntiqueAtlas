@@ -3,6 +3,14 @@
   "data": {
     "textures": {
       "antiqueatlas:shipwreck": 1
+    },
+    "stitch": {
+      "antiqueatlas:shore": "both",
+      "antiqueatlas:rock_shore": "both",
+      "antiqueatlas:swamp": "both",
+      "antiqueatlas:swamp_water": "both",
+      "antiqueatlas:water": "both",
+      "antiqueatlas:ice_spikes": "both"
     }
   }
 }

@@ -12,7 +12,8 @@
     "stitch": {
       "antiqueatlas:swamp_hills": "both",
       "antiqueatlas:swamp_water": "both",
-      "antiqueatlas:water": "both"
+      "antiqueatlas:water": "both",
+      "antiqueatlas:shipwreck": "both"
     }
   }
 }

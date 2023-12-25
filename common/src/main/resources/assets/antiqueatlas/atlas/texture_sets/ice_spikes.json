@@ -4,6 +4,9 @@
     "textures": {
       "antiqueatlas:ice_spikes": 1,
       "antiqueatlas:ice_spikes2": 1
+    },
+    "stitch": {
+      "antiqueatlas:shipwreck": "both"
     }
   }
 }

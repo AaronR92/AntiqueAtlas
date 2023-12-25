@@ -9,7 +9,8 @@
       "antiqueatlas:shore": "both",
       "antiqueatlas:rock_shore": "both",
       "antiqueatlas:swamp": "both",
-      "antiqueatlas:swamp_water": "both"
+      "antiqueatlas:swamp_water": "both",
+      "antiqueatlas:shipwreck": "both"
     }
   }
 }
