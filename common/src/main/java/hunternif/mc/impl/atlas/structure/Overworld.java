@@ -16,7 +16,7 @@ public class Overworld {
 
     public static void registerPieces() {
         StructureHandler.registerTile(StructurePieceType.RUINED_PORTAL, 10, TileIdMap.RUINED_PORTAL, Overworld::aboveGround);
-        StructureHandler.registerTile(StructurePieceType.SHIPWRECK, 10, TileIdMap.RUINED_PORTAL, Overworld::always);
+        StructureHandler.registerTile(StructurePieceType.SHIPWRECK, 10, TileIdMap.SHIPWRECK, Overworld::always);
     }
 
     private static Collection<ChunkPos> aboveGround(World world, @SuppressWarnings("unused") StructurePoolElement structurePoolElement, BlockBox blockBox, StructurePiece piece) {
