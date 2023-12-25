@@ -6,6 +6,9 @@
     },
     "textures": {
       "antiqueatlas:rock_shore": 1
+    },
+    "stitch": {
+      "antiqueatlas:shipwreck": "both"
     }
   }
 }
