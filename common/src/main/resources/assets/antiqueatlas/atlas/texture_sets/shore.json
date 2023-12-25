@@ -8,6 +8,9 @@
       "antiqueatlas:shore": 1,
       "antiqueatlas:shore2": 1,
       "antiqueatlas:shore3": 1
+    },
+    "stitch": {
+      "antiqueatlas:shipwreck": "both"
     }
   }
 }
