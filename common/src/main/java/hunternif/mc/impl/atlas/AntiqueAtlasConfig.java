@@ -25,10 +25,6 @@ public class AntiqueAtlasConfig implements ConfigData {
     @Comment("Whether to add global markers for Nether Portals.")
     public boolean autoNetherPortalMarkers = true;
 
-    @ConfigEntry.Category("gameplay")
-    @Comment("Whether to add global markers for shipwrecks.")
-    public boolean autoShipwreckMarkers = true;
-
     //============ Interface settings =============
     @ConfigEntry.Category("userInterface")
     public boolean doScaleMarkers = false;

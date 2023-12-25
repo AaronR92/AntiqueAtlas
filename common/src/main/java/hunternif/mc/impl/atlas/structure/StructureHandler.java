@@ -32,9 +32,7 @@ public class StructureHandler {
     private static final Map<Identifier, Pair<Identifier, Text>> STRUCTURE_PIECE_TO_MARKER_MAP = new HashMap<>();
     private static final Map<TagKey<Structure>, Pair<Identifier, Text>> STRUCTURE_TAG_TO_MARKER_MAP = new HashMap<>();
     private static final Map<Identifier, Integer> STRUCTURE_PIECE_TILE_PRIORITY = new HashMap<>();
-    public static final Setter ALWAYS = (world, element, box, rotation) -> Collections.singleton(new ChunkPos(
-            MathUtil.getCenter(box).getX() >> 4, MathUtil.getCenter(box).getZ() >> 4
-    ));
+    public static final Setter ALWAYS = (world, element, box, rotation) -> Collections.singleton(new ChunkPos(MathUtil.getCenter(box).getX() >> 4, MathUtil.getCenter(box).getZ() >> 4));
 
 
     public static Collection<ChunkPos> IF_X_DIRECTION(World ignoredWorld, StructurePoolElement ignoredElement, BlockBox box, StructurePiece piece) {
@@ -133,8 +131,6 @@ public class StructureHandler {
         }
 
         Identifier structurePieceId = Registries.STRUCTURE_PIECE.getId(structurePiece.getType());
-        System.out.println(structurePieceId.toString());
-
         if (STRUCTURE_PIECE_TO_TILE_MAP.containsKey(structurePieceId)) {
             for (Pair<Identifier, Setter> entry : STRUCTURE_PIECE_TO_TILE_MAP.get(structurePieceId)) {
                 Collection<ChunkPos> matches;
@@ -153,6 +149,7 @@ public class StructureHandler {
 
     public static void resolve(StructureStart structureStart, ServerWorld world) {
         Identifier structureId = Registries.STRUCTURE_TYPE.getId(structureStart.getStructure().getType());
+
 
         Pair<Identifier, Text> foundMarker = null;
 
